@@ -6,5 +6,23 @@ edition = "2024"
 [dependencies]
 anyhow = { version = "1.0.100" }
 clap = { version = "4.5.50", features = ["derive"] }
+serde = "1.0.228"
+fs-err = "3.1.3"
+toml = "0.9.8"
+itertools = "0.14.0"
+
 ruff_python_ast = { git = "https://github.com/astral-sh/ruff", tag = "0.14.1" }
 ruff_python_parser = { git = "https://github.com/astral-sh/ruff", tag = "0.14.1" }
+
+uv-pep508 = { git = "https://github.com/astral-sh/uv", tag="0.9.5" }
+uv-requirements = { git = "https://github.com/astral-sh/uv", tag="0.9.5" }
+uv-pypi-types = { git = "https://github.com/astral-sh/uv", tag="0.9.5" }
+uv-normalize = { git = "https://github.com/astral-sh/uv", tag="0.9.5" }
+uv-workspace = { git = "https://github.com/astral-sh/uv", tag="0.9.5" }
+
+[patch.crates-io]
+reqwest-middleware = { git = "https://github.com/astral-sh/reqwest-middleware", rev = "7650ed76215a962a96d94a79be71c27bffde7ab2" }
+reqwest-retry = { git = "https://github.com/astral-sh/reqwest-middleware", rev = "7650ed76215a962a96d94a79be71c27bffde7ab2" }
+
+[dev-dependencies]
+tempfile = "3"
