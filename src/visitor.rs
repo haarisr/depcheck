@@ -38,6 +38,14 @@ fn walk_stmt(visitor: &mut ImportVisitor, stmt: &Stmt) {
                 .extend(names.iter().map(|item| item.name.to_string()));
             ruff_walk_stmt(visitor, stmt);
         }
+        Stmt::ImportFrom(ast::StmtImportFrom {
+            names: _, module, ..
+        }) => {
+            if let Some(foo) = module {
+                visitor.imports.insert(foo.to_string());
+            }
+            ruff_walk_stmt(visitor, stmt);
+        }
         _ => {
             ruff_walk_stmt(visitor, stmt);
         }

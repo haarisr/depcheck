@@ -41,6 +41,24 @@ mod tests {
     }
 
     #[test]
+    fn test_from_import() -> Result<()> {
+        let python = concat!(
+            "from pathlib import Path\n",
+            "from flask import Flask\n",
+            "from my_app import Cli\n",
+            "from utils import greet as g\n"
+        );
+
+        let expected: HashSet<String> = ["pathlib", "flask", "my_app", "utils"]
+            .into_iter()
+            .map(String::from)
+            .collect();
+        let result = parse_imports(python)?;
+        assert_eq!(result, expected);
+        Ok(())
+    }
+
+    #[test]
     fn test_no_import() -> Result<()> {
         let python = "";
 
