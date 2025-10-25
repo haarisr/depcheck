@@ -1,6 +1,10 @@
+use std::fs;
+
 use anyhow::Result;
 use clap::Parser;
-use std::fs;
+
+mod parser;
+mod visitor;
 
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
@@ -12,8 +16,10 @@ struct Args {
 fn main() -> Result<()> {
     let cli = Args::parse();
     let contents = fs::read_to_string(&cli.path)?;
-    println!("Contents of the file");
-    println!("{}", contents);
+    let imports = parser::parse_imports(&contents)?;
 
+    for import in imports.into_iter() {
+        println!("{}", import);
+    }
     Ok(())
 }
